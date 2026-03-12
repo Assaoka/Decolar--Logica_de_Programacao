@@ -1,0 +1,260 @@
+# 🐍 Aula 1: Introdução a Algoritmos
+
+> [!abstract] Missão de Hoje
+> Descobrir como "falar" com o computador, criar nossas primeiras caixas de memória (variáveis) e transformar o Python em uma calculadora superpoderosa!
+
+---
+
+## 🤖 1. O que é um Algoritmo?
+Computadores são máquinas incríveis: eles são extremamente rápidos e quase nunca erram contas. Mas eles têm um segredo: eles são "bobos"! Eles não têm iniciativa própria e só fazem exatamente o que mandamos.
+
+Um Algoritmo é apenas uma sequência de passos lógicos para resolver um problema. Se você der uma instrução vaga, o computador vai se confundir. Imagine explicar para um alienígena como escovar os dentes: você não pode dizer apenas "escove", você precisa dizer "pegue a escova", "abra a pasta", "coloque a pasta na escova"...
+
+Veja este vídeo clássico de um pai agindo como um computador enquanto os filhos tentam ensinar ele a fazer um sanduíche:
+
+<iframe title="Exact Instructions Challenge - THIS is why my kids hate me. | Josh Darnit" src="https://www.youtube.com/embed/cDA3_5982h8?feature=oembed" height="113" width="200" allowfullscreen="" allow="fullscreen" style="aspect-ratio: 1.76991 / 1; width: 100%; height: 100%;"></iframe>
+
+**Conclusão:** Programar não é apenas escrever código; é a arte de organizar seus pensamentos e traduzir suas vontades em instruções que o computador entenda. Com o avanço das IAs, saber **como** resolver o problema (a lógica) é muito mais importante do que decorar comandos!
+
+---
+## 🗣️ 2. O que é uma Linguagem de Programação?
+Imagine que você quer pedir um lanche no Japão, mas só fala Português. Você precisaria de um tradutor, certo? 
+
+A linguagem de programação é esse meio-termo. É um conjunto de regras que nos permite dar instruções para um computador de um jeito que humanos consigam ler e máquinas consigam processar.
+
+Existem milhares de linguagens (C, Java, JavaScript), mas o **Python** é especial:
+* **Fácil de ler:** Parece muito com o inglês comum.
+* **Ciência de Dados:** É a linguagem favorita para Inteligência Artificial e análise de dados.
+* **Bibliotecas:** Existem milhões de "peças de Lego" (códigos prontos) que podemos usar para criar coisas complexas rápido.
+
+---
+## 📝 3. Escrevendo na Tela (Saída de Dados)
+O primeiro passo em programação é geralmente fazer o computador "falar". Em Python, usamos o comando `print()` para isso. 
+
+Tudo o que você quer que o computador exiba como texto deve estar entre dentro dos parênteses.
+
+**Exemplo:**
+
+```python
+print("Olá, turma!")
+print("Vamos começar a programar em Python!")
+```
+
+Use a célula de código abaixo para se apresentar. Escreva seu nome e um hobby que você gosta.
+
+```python
+# Escreva seu código aqui. Use o comando print()
+print("Meu nome é [Seu Nome] e eu gosto de [Seu Hobby]!")
+```
+
+## 📦 4. Variáveis: As Caixinhas da Memória
+Imagine que você está jogando um RPG e precisa guardar a quantidade de moedas de ouro do seu personagem. Para o computador não esquecer esse valor, usamos uma variável.
+
+Uma variável é como uma caixinha com uma etiqueta. A etiqueta é o nome da variável e o que está dentro é o valor.
+
+```python
+moedas_de_ouro = 50
+```
+
+### 🏷️Nomes e Regras
+Para que o computador não se perca no "armário" da memória, os nomes das variáveis precisam seguir regras:
+ 1. **Case Sensitive (Sensível a Maiúsculas):** `vida` é uma caixa, `VIDA` é outra caixa totalmente diferente.
+2. **Início:** O nome **não pode** começar com números ou conter símbolos (exceto o underline `_`).
+   - ❌ Errado: `1_lugar`, `pontos!`
+   - ✅ Certo: `lugar_1`, `pontos_totais`
+
+**Recomendações:**
+* **Padrão (snake_case):** Se o nome tiver mais de uma palavra, separamos por underline: `velocidade_maxima`.
+* **Seja Descritivo:** Não chame uma caixa de `x`. Chame de `idade_usuario`. Isso ajuda você e outros programadores a entenderem o código daqui a um mês!
+
+### 📑 Tipos Primitivos:
+Nem toda caixa guarda a mesma coisa. As caixas podem ter tamanhos e formatos diferentes de acordo com o que será armazenado.
+
+Em python, nós temos 4 tipos básicos de caixas:
+1.  **`int` (Inteiro):** Números sem vírgula. Ex: `10`, `-5`, `0`.
+2.  **`float` (Flutuante):** Números com vírgula. Ex: `1.75`, `10.0`.
+	- **Atenção:** Usamos **ponto** `.` como separador! 
+3.  **`bool` (Booleano):** Verdade ou Falso. Só aceita `True` ou `False`.
+4.  **`str` (String):** Guardam textos. Sempre entre aspas simples `'`. Ex: `'Olá Mundo'`.
+
+Podemos colocar uma "etiqueta externa" na caixa para dizer o que pretendemos guardar nela. Isso ajuda a ler o código:
+
+```python
+# Criando uma caixa chamada 'vida' que guarda um número inteiro
+vida: int = 100 
+```
+
+Nesse curso, vamos optar por utilizar essa etiqueta para auxiliar no entendimento do código.
+
+### 💬 Utilizando Variáveis
+Para misturar texto com o valor das nossas variáveis, usamos o `f` antes das aspas e colocamos a variável entre chaves `{}`:
+
+```python
+nome: str = 'João'
+print(f'Olá, {nome}! Seja bem-vindo ao curso.')
+```
+
+Outra opção muito comum é utilizar variáveis para definir outras variáveis. Basta utilizarmos o nome:
+
+```python
+idade: int = 12
+idade_prox: int = idade + 1
+print(f'Ano que vêm você terá {idade_prox} anos.')
+```
+
+Nós podemos também sobrescrever o valor das variáveis. Ao tentar acessa-la, temos acesso apenas ao último valor:
+
+```python
+print(idade) # 12
+idade = 15 # Idade já foi declarado como inteiro
+print(idade) # 15
+```
+
+## ⌨️ 5. Lendo Dados do Teclado (Entrada de Dados)
+Para deixar o programa interativo, usamos a função `input()`. Ela faz o programa "pausar" e esperar o usuário digitar algo.
+
+```python
+nome_usuario: str = input("Qual é o seu nome? ")
+print(f"Seu nome é {nome_usuario}")
+```
+
+### ☢️ ATENÇÃO:  Casting de Tipos
+O `input()` é meio teimoso: ele entende **tudo** como texto (`string`). Se você digitar `10`, ele entende como os caracteres "1" e "0", e não como o número dez. Para fazer contas, precisamos converter (fazer o _casting_):
+
+```python
+nivel = input("Qual seu nível? ")
+nivel = nivel + 1 # ERRO
+```
+
+```python
+nivel = int(input("Qual seu nível? "))
+nivel = nivel + 1 # Funciona
+```
+
+## ⚙️ 6. Operadores: A Matemática do Computador
+Assim como na matemática, podemos fazer contas em Python:
+
+| Operador | Descrição                 |  Exemplo  | Resultado |
+| :------: | :------------------------ | :-------: | :-------: |
+|   `+`    | Adição                    |  `5 + 3`  |    `8`    |
+|   `-`    | Subtração                 |  `5 - 3`  |    `2`    |
+|   `*`    | Multiplicação             |  `5 * 3`  |   `15`    |
+|   `/`    | Divisão                   | `10 / 2`  |   `5.0`   |
+|   `//`   | Divisão Inteira           | `11 // 2` |    `5`    |
+|   `%`    | Resto da Divisão (Módulo) | `11 % 2`  |    `1`    |
+|   `**`   | Potência (Exponenciação)  | `2 ** 3`  |    `8`    |
+### 📦 Operações In-Place
+Na programação, é extremamente comum atualizarmos o valor de uma variável usando o valor que já está nela. Por exemplo: "O XP atual recebe o XP atual + 10". 
+
+Para não precisarmos escrever o nome da variável duas vezes, usamos os **Operadores In-Place**. Suponha que seu personagem comece com **X = 10**:
+
+| Operador | Descrição                 |  Exemplo  | Novo valor de X |
+| :------: | :------------------------ | :-------: | :-------------: |
+|   `+=`   | Adição                    | `X += 5`  |      `15`       |
+|   `-=`   | Subtração                 | `X -= 3`  |       `7`       |
+|   `*=`   | Multiplicação             | `X *= 2`  |      `20`       |
+|   `/=`   | Divisão                   | `X /= 2`  |      `5.0`      |
+|  `//=`   | Divisão Inteira           | `X //= 3` |       `3`       |
+|   `%=`   | Resto da Divisão (Módulo) | `X %= 3`  |       `1`       |
+|  `**=`   | Potência (Exponenciação)  | `X **= 2` |      `100`      |
+# 🛠️ Desafios em Sala
+## O Robô Educado: 
+Peça o nome do aluno e sua cor favorita. Imprima uma mensagem amigável.
+
+| Entrada      | Saída                                                 |
+| :----------- | :---------------------------------------------------- |
+| João<br>Azul | Olá João, eu também acho que Azul é uma cor incrível! |
+
+```python
+# Solução:
+
+```
+
+## Calculadora de Mesada:
+Peça o valor da mesada (float) e quanto custa um lanche (float). Calcule e mostre quanto sobra.
+
+| Entrada       | Saída                            |
+| :------------ | :------------------------------- |
+| 50.0<br>15.50 | Após o lanche, te restam R$ 34.5 |
+
+```python
+# Solução:
+
+```
+
+## Par ou Ímpar:
+Peça um número e mostre o resto da divisão dele por 2. (Dica: se o resto for 0, o número é par!)
+
+| Entrada | Saída                              |
+| :------ | :--------------------------------- |
+| 7       | O resto da divisão de 7 por 2 é 1. |
+
+```python
+# Solução:
+
+```
+
+---
+# 💪 Exercícios de Casa
+## 1. Teste de Lógica
+Qual será o valor final da variável `pontos` ao final desse código?
+
+```python
+pontos: int = 10
+pontos = pontos + 5
+pontos = 2
+```
+
+- [ ] (A) 15
+- [ ] (B) 10
+- [ ] (C) 2
+
+## 2. Detetive de Erros
+a) Classifique os nomes abaixo como Errado, Funciona (mas é ruim) ou Bom Nome:
+- `1_lugar`:
+- `minha idade`:
+- `n`: 
+- `nome_usuario`: 
+- `pontoFinal`: 
+- `A`
+- `xp_do_jogador`:
+
+b) Crie um nome para cada classe:
+ - Errado: 
+ - Funciona (mas é ruim):
+ - Bom Nome:
+
+## 3. Quadrado, Cubo e Raiz Quadrada
+Leia um valor inteiro e apresente os resultados do quadrado, do cubo e da raiz quadrada do valor lido.
+- **Dica:** É possível calcular a raiz quadrada utilizando potências.
+
+| Entrada | Saída            |
+| :------ | :--------------- |
+| 4       | 16<br>64<br>2.0  |
+| 9       | 81<br>729<br>3.0 |
+
+## 4. Calculadora de Packs
+Um baú de Minecraft organiza itens em "packs" de X unidades (dependendo do item). Peça o nome de um item, a quantidade total dele e como ele se divide. Calcule quantos packs completos o jogador tem.
+
+| Entrada                 | Saída                              |
+| :---------------------- | :--------------------------------- |
+| Terra<br>128<br>64      | Você tem 2 packs de "Terra".       |
+| Olho do Fim<br>64<br>16 | Você tem 2 packs de "Olho do Fim". |
+
+## 5. Trocando Valores
+Peça dois valores (A e B). Faça o computador trocar os valores entre as variáveis e mostre o resultado.
+- **Dica:** Imagine que você possui 2 copos com líquidos diferentes. Como você pode trocar o conteúdo deles sem misturar.
+
+## 6. Média Ponderada
+Peça as 3 notas de um aluno. Calcule a média sabendo que: Nota A (peso 2), Nota B (peso 3) e Nota C (peso 5).
+
+| Entrada      | Saída                 |
+| :----------- | :-------------------- |
+| 10<br>5<br>8 | Sua média final é 7.5 |
+## 7. O Tempo Voa
+Leia a idade de uma pessoa em dias e converta para Anos, Meses e Dias. 
+- Considere 1 ano = 365 dias e 1 mês = 30 dias.
+
+| Entrada | Saída                  |
+| :------ | :--------------------- |
+| 400     | 1 ano, 1 mês e 5 dias. |
