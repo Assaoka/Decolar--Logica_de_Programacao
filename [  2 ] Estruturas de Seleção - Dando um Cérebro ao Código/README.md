@@ -1,12 +1,3 @@
----
-Data de Criação: 2026-03-03
-Notas Relacionadas:
-  - "[[1. Variáveis, Input e Output - Introdução a Algoritmos]]"
-tags:
-  - Programação
-  - Decolar
-  - Lógica_de_Programação
----
 # 🐍 Aula 2: Estruturas de Seleção - Dando um "Cérebro" ao Código
 
 > [!abstract] Missão de Hoje
