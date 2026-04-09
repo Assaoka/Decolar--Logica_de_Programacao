@@ -119,6 +119,22 @@ def processar_arquivos():
             
         print(f"✅ Convertido: '{arquivo}' -> '{caminho_saida}'")
 
+def processar_individual(arquivo: str):
+    if "utils/" not in arquivo:
+        arquivo = "utils/" + arquivo
+    nome_base = os.path.splitext(arquivo)[0]
+    caminho_saida = f"{nome_base}.ipynb"
+    
+    with open(arquivo, 'r', encoding='utf-8') as f:
+        conteudo = f.read()
+        
+    ipynb_json = converter_md_para_ipynb(conteudo)
+    
+    with open(caminho_saida, 'w', encoding='utf-8') as f:
+        f.write(ipynb_json)
+        
+    print(f"✅ Convertido: '{arquivo}' -> '{caminho_saida}'")
+
 # Executa a conversão
 if __name__ == "__main__":
-    processar_arquivos()
+    processar_individual("README.md")
