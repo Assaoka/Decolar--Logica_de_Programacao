@@ -9,6 +9,7 @@
 | 2 | Estruturas de Seleção - Dando um Cérebro ao Código | <a href="https://colab.research.google.com/github/Assaoka/Decolar--Logica_de_Programacao/blob/main/%5B%20%202%20%5D%20Estruturas%20de%20Sele%C3%A7%C3%A3o%20-%20Dando%20um%20C%C3%A9rebro%20ao%20C%C3%B3digo/Estruturas%20de%20Sele%C3%A7%C3%A3o.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> |
 | 3 | Estruturas de Repetição - O Poder da Automação | <a href="https://colab.research.google.com/github/Assaoka/Decolar--Logica_de_Programacao/blob/main/%5B%20%203%20%5D%20Estruturas%20de%20Repeti%C3%A7%C3%A3o%20-%20O%20Poder%20da%20Automa%C3%A7%C3%A3o/Estruturas%20de%20Repeti%C3%A7%C3%A3o.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> |
 | 4 | Listas - Organizando o Inventário | <a href="https://colab.research.google.com/github/Assaoka/Decolar--Logica_de_Programacao/blob/main/%5B%20%204%20%5D%20Listas%20-%20Organizando%20o%20Invent%C3%A1rio/Listas.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> |
+| 5 | Revisão 1 |  <a href="https://colab.research.google.com/github/Assaoka/Decolar--Logica_de_Programacao/blob/main/%5B%20%205%20%5D%20Revis%C3%A3o%201/Revis%C3%A3o.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> |
 
 ## 🛠️ Como Utilizar os Materiais
 1. Escolha a aula desejada na tabela acima.

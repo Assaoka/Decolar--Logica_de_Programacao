@@ -3,6 +3,8 @@ import re
 import os
 import glob
 
+caminho_de_execucao: str = os.path.dirname(os.path.abspath(__file__))
+
 def converter_md_para_ipynb(conteudo_md):
     cells = []
     current_md = []
@@ -119,9 +121,11 @@ def processar_arquivos():
             
         print(f"✅ Convertido: '{arquivo}' -> '{caminho_saida}'")
 
+
 def processar_individual(arquivo: str):
-    if "utils/" not in arquivo:
-        arquivo = "utils/" + arquivo
+    global caminho_de_execucao
+    if caminho_de_execucao not in arquivo:
+        arquivo = f"{caminho_de_execucao}\{arquivo}"
     nome_base = os.path.splitext(arquivo)[0]
     caminho_saida = f"{nome_base}.ipynb"
     
