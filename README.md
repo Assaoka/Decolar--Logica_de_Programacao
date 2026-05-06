@@ -10,6 +10,7 @@
 | 3 | Estruturas de Repetição - O Poder da Automação | <a href="https://colab.research.google.com/github/Assaoka/Decolar--Logica_de_Programacao/blob/main/%5B%20%203%20%5D%20Estruturas%20de%20Repeti%C3%A7%C3%A3o%20-%20O%20Poder%20da%20Automa%C3%A7%C3%A3o/Estruturas%20de%20Repeti%C3%A7%C3%A3o.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> |
 | 4 | Listas - Organizando o Inventário | <a href="https://colab.research.google.com/github/Assaoka/Decolar--Logica_de_Programacao/blob/main/%5B%20%204%20%5D%20Listas%20-%20Organizando%20o%20Invent%C3%A1rio/Listas.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> |
 | 5 | Revisão 1 |  <a href="https://colab.research.google.com/github/Assaoka/Decolar--Logica_de_Programacao/blob/main/%5B%20%205%20%5D%20Revis%C3%A3o%201/Revis%C3%A3o.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> |
+| 6 | Matrizes - O Mapa do Jogo | <a href="https://colab.research.google.com/github/Assaoka/Decolar--Logica_de_Programacao/blob/main/%5B%20%206%20%5D%20Matrizes%20-%20O%20Mapa%20do%20Jogo/Matrizes.ipynb" target="_parent"><img src="https://colab.research.google.com/assets/colab-badge.svg" alt="Open In Colab"/></a> |
 
 ## 🛠️ Como Utilizar os Materiais
 1. Escolha a aula desejada na tabela acima.
