@@ -17,6 +17,11 @@ print(type(nick))
 ## 📍 2. Strings são Sequências: Índices e Fatiamento
 Lembra das Listas e Matrizes? Cada posição tinha um **endereço** (índice), começando do `0`. Com strings é exatamente igual: cada letra tem uma posição fixa.
 
+| S | t | e | v | e | 1 | 2 | 3 |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| -8 | -7 | -6 | -5 | -4 | -3 | -2 | -1 |
+
 ```python
 nick: str = "Steve123"
 
@@ -27,6 +32,11 @@ print(nick[-1])  # 3 (índice negativo = de trás pra frente, igual nas listas!)
 
 ### ✂️ Fatiamento (Slicing)
 Além de pegar **um** caractere, podemos pegar um **pedaço inteiro** da string usando `[inicio:fim]`. O `fim` nunca é incluído — ele marca "até aqui, sem contar".
+
+| C | a | c | a | d | o | r | D | e | D | i | a | m | a | n | t | e | s |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 | 9 | 10 | 11 | 12 | 13 | 14 | 15 | 16 | 17 |
+| -18 | -17 | -16 | -15 | -14 | -13 | -12 | -11 | -10 | -9 | -8 | -7 | -6 | -5 | -4 | -3 | -2 | -1 |
 
 ```python
 nick: str = "CacadorDeDiamantes"
@@ -49,6 +59,11 @@ print(nick_cortado) # DestruidorDe...
 
 Também podemos usar um terceiro número no fatiamento: o **passo** (`[inicio:fim:passo]`). Ele define de quantos em quantos caracteres o Python "anda" enquanto pega os valores. O padrão é `1` (pega um caractere de cada vez, sem pular nenhum), mas podemos mudar isso:
 
+| A | B | C | D | E | F | G | H |
+|:-:|:-:|:-:|:-:|:-:|:-:|:-:|:-:|
+| 0 | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
+| -8 | -7 | -6 | -5 | -4 | -3 | -2 | -1 |
+
 ```python
 codigo: str = "ABCDEFGH"
 
@@ -65,25 +80,7 @@ print(palavra[::-1]) # ottiD
 ```
 
 ---
-## 🔒 3. Strings são Imutáveis
-Aqui vai uma diferença importante entre Strings e Listas. Nas listas, podíamos trocar um item direto pelo índice (`lista[0] = "novo item"`). Com strings, isso **não é permitido**:
-
-```python
-nick: str = "Steve"
-nick[0] = "J" # ERRO! TypeError: 'str' object does not support item assignment
-```
-
-**⚠️ Por Que Isso Acontece?**
-> No Python, uma string é um pacote fechado: depois de criada, ela não pode ser alterada por dentro. Se você quer "mudar" uma string, na verdade você está sempre **criando uma string nova** e guardando por cima da antiga. Vamos entender exatamente o que isso significa "por baixo dos panos" (memória e referências) em uma aula futura!
-
-```python
-nick: str = "Steve"
-nick = "J" + nick[1:]  # Isso funciona! Criamos uma string NOVA
-print(nick) # Jteve
-```
-
----
-## 🛠️ 4. Métodos Essenciais
+## 🛠️ 3. Métodos Essenciais
 Assim como listas e dicionários, strings vêm com várias "ferramentas" já grudadas nelas:
 
 | Método                  | O que faz?                                             | Exemplo                                | Resultado          |
@@ -111,6 +108,34 @@ cla: str = partes[0]
 nick: str = partes[1]
 
 print(f"Clã: {cla} | Nick: {nick}")
+```
+
+---
+## 🔒 4. Strings são Imutáveis
+Aqui vai uma diferença importante entre Strings e Listas. Nas listas, podíamos trocar um item direto pelo índice (`lista[0] = "novo item"`). Com strings, isso **não é permitido**:
+
+```python
+nick: str = "Steve"
+nick[0] = "J" # ERRO! TypeError: 'str' object does not support item assignment
+```
+
+**⚠️ Por Que Isso Acontece?**
+> No Python, uma string é um pacote fechado: depois de criada, ela não pode ser alterada por dentro. Se você quer "mudar" uma string, na verdade você está sempre **criando uma string nova** e guardando por cima da antiga. Vamos entender exatamente o que isso significa "por baixo dos panos" (memória e referências) em uma aula futura!
+
+```python
+nick: str = "Steve"
+nick = "J" + nick[1:]  # Isso funciona! Criamos uma string NOVA
+print(nick) # Jteve
+```
+
+Outra forma de fazer isso é converter a string para uma lista, editar e depois juntar de novo:
+
+```python
+nick: str = "Steve"
+nick_mutavel: list[str] = list(nick)
+nick_mutavel[0] = "J"
+nick = "".join(nick_mutavel)
+print(nick)
 ```
 
 ---
@@ -226,7 +251,7 @@ print(nick[::2])
 Um aluno tentou trocar a primeira letra do nick do seu personagem para maiúscula, mas o código não funciona. Encontre o erro e explique por que ele acontece:
 
 ```python
-nick = "steve"
+nick: str = "steve"
 nick[0] = "S"
 print(nick)
 ```
@@ -235,7 +260,7 @@ print(nick)
 
 ## 3. Verificador de Palíndromo
 Um palíndromo é uma palavra que se lê igual de trás para frente. Peça um nome de personagem de jogo e diga se ele é um palíndromo, ignorando maiúsculas e minúsculas.
-- **Dica:** lembre-se do truque de inverter string com fatiamento (`[::-1]`).
+- **Dica:** Utilize fatiamento.
 
 | Entrada | Saída                              |
 | :------- | :------------------------------------ |
@@ -243,12 +268,38 @@ Um palíndromo é uma palavra que se lê igual de trás para frente. Peça um no
 | Otto     | "Otto" é um palíndromo!               |
 | Mario    | "Mario" não é um palíndromo.          |
 
+```python
+# Solução:
+def verificar_palindromo(nome: srt) -> str:
+    pass
+
+for nome in ["Ana", "Otto", "Mario"]:
+    print(verificar_palindromo(nome))
+
+#print(verificar_palindromo(input()))
+```
+
 ## 4. Contador de Vogais e Consoantes
 Peça uma frase e conte quantas vogais e quantas consoantes ela tem (ignore espaços).
 
 | Entrada                | Saída                                  |
 | :----------------------- | :---------------------------------------- |
 | Minecraft é incrivel     | Vogais: 8 \| Consoantes: 13               |
+| Estou aprendendo Python 3 no Decolar | Vogais: 12 \| Consoantes: 21             |
+
+```python
+# Solução:
+def contar_vogais_consoantes(frase: str) -> list[int]:
+    pass
+
+for frase in [
+    "Minecraft é incrivel", 
+    "Estou aprendendo Python 3 no Decolar"
+]:
+    print(contar_vogais_consoantes(frase))
+
+#print(contar_vogais_consoantes(input()))
+```
 
 ## 5. Gerador de Clã Tag
 Muitos jogos (Free Fire, Clash Royale) mostram o nome do jogador junto com a tag do clã, tipo `[ABC] Nick`. Peça o nome do clã e o nick do jogador, e monte essa formatação. A tag do clã deve ter no máximo 3 letras e sempre aparecer em maiúsculo (se o usuário digitar mais de 3 letras, use só as 3 primeiras).
@@ -258,12 +309,42 @@ Muitos jogos (Free Fire, Clash Royale) mostram o nome do jogador junto com a tag
 | aba<br>Steve                  | [ABA] Steve          |
 | dragoes<br>Alex               | [DRA] Alex           |
 
+```python
+# Solução:
+def gerar_tag_cla(clan: str, jogador: str) -> str:
+    pass
+
+for clan, jogador in [
+    ("aba", "Steve"), 
+    ("dragoes", "Alex")
+]:
+    print(gerar_tag_cla(clan, jogador))
+
+#print(gerar_tag_cla(input(), input()))
+```
+
 ## 6. Checador de Senha Forte
 Crie um programa que avalie a senha de uma conta de jogo. Para ser considerada forte, a senha precisa ter: no mínimo 8 caracteres, pelo menos uma letra maiúscula e pelo menos um número.
-- **Dica:** pesquise sobre o método `.isupper()` e lembre-se que dá pra percorrer uma string com um `for`, letra por letra, assim como percorremos uma lista.
 
 | Entrada       | Saída                                                          |
 | :-------------- | :----------------------------------------------------------------- |
-| minecraft123     | Senha fraca: falta uma letra maiúscula.                            |
-| Minecraft        | Senha fraca: falta um número.                                      |
 | Minecraft123     | Senha forte!                                                       |
+| minecraft123     | Senha fraca: <br>- Falta uma letra maiúscula.    |
+| Minecraft        | Senha fraca: <br>- Falta um número.                                |
+| senha            | Senha fraca: <br>- Falta uma letra maiúscula. <br>- Falta um número.    |
+
+```python
+# Solução:
+def verificar_senha_forte(senha: str) -> str:
+    pass
+
+for senha in [
+    "Minecraft123", 
+    "minecraft123", 
+    "Minecraft", 
+    "senha"
+]:
+    print(verificar_senha_forte(senha))
+
+#print(verificar_senha_forte(input()))
+```
