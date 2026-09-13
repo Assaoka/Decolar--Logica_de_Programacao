@@ -13,7 +13,7 @@ Pensa no **Stardew Valley**: você planta uma semente, sai do jogo pra dormir, e
 > No Colab, os arquivos que você criar ficam guardados só enquanto a sessão está aberta (eles somem se você fechar a aba ou ficar muito tempo sem usar). O mecanismo que vamos aprender é exatamente o mesmo usado em qualquer computador — só o "tempo de vida" do arquivo que muda.
 
 ---
-## 📝 2. Escrevendo em um Arquivo (`open` e `write`)
+## 📝 2. Escrevendo em um Arquivo (`open`, `close` e `write`)
 Para criar ou abrir um arquivo em Python, usamos a função `open()`, informando o **caminho** do arquivo e o **modo** que queremos usar:
 
 | Modo | O que faz? |
@@ -22,12 +22,39 @@ Para criar ou abrir um arquivo em Python, usamos a função `open()`, informando
 | `"a"` (append) | Cria o arquivo se não existir, ou **adiciona no final** sem apagar o que já tinha. |
 | `"r"` (read) | Abre o arquivo só para **leitura**. Dá erro se o arquivo não existir. |
 
-Usamos o comando `with` para abrir o arquivo — ele garante que o Python **feche o arquivo sozinho** assim que terminarmos de usá-lo, mesmo se algo der errado no meio do caminho.
+### ⚠️ O Jeito Manual: Abrindo e Fechando
+Quando você abre um arquivo no computador, o sistema operacional reserva aquele arquivo para o seu programa. Se você não mandar o Python fechar o arquivo quando terminar de usar, ele continuará "preso" e ocupando memória do sistema!
+
+```python
+# 1. Abrimos o arquivo e guardamos em uma variável
+arquivo = open("diario_fazenda.txt", "a", encoding="utf-8")
+
+# 2. Escrevemos dados nele
+arquivo.write("Dia 1: colhidos 12 morangos, lucro de 60 moedas\n")
+
+# 3. OBRIGATÓRIO: Precisamos fechar o arquivo no final!
+arquivo.close()
+```
+
+**❌ O Perigo de Esquecer o `.close()`:**
+1. **Perda de Dados:** O Python guarda o que você manda escrever em um "buffer" na memória RAM e só salva fisicamente no disco quando o arquivo é fechado. Se o programa terminar ou cair antes, você pode perder dados!
+2. **Arquivo Bloqueado:** Outros programas (ou o próprio sistema) podem ser impedidos de ler ou editar esse arquivo porque ele ainda consta como em uso.
+3. **Consumo de Recursos:** Manter arquivos abertos sem necessidade gasta recursos do sistema operacional.
+4. **Erros Inesperados:** Se um erro acontecer no meio do programa antes do `.close()`, a linha do fechamento nunca será executada.
+
+---
+
+### 🛡️ O Jeito Seguro: A Palavra Reservada `with`
+Para resolver esse problema de forma elegante e garantir que o arquivo sempre seja fechado, o Python possui a palavra reservada **`with`** (conhecida como *Context Manager* ou Gerenciador de Contexto).
+
+Com o `with`, você diz ao Python para abrir o arquivo e, assim que o Python sai desse bloco (ou caso ocorra um erro lá dentro), ele **fecha o arquivo automaticamente** para você!
 
 ```python
 with open("diario_fazenda.txt", "a", encoding="utf-8") as arquivo:
     arquivo.write("Dia 1: colhidos 12 morangos, lucro de 60 moedas\n")
     arquivo.write("Dia 2: colhidos 8 morangos, lucro de 40 moedas\n")
+
+# Fora do bloco indentado, o arquivo JÁ FOI FECHADO automaticamente!
 ```
 
 > **⚠️ Não Esqueça do `\n`!**
@@ -92,7 +119,7 @@ with open("guilda.json", "w", encoding="utf-8") as arquivo:
     json.dump(guilda, arquivo, indent=4, ensure_ascii=False)
 ```
 
-- `indent=4`: deixa o arquivo formatado com recuo, fácil de ler (sem isso, tudo fica em uma linha só).
+- `indent=4`: deixa o arquivo formatado com recuo, fácil de ler (sem isso, tudo fica em uma linha só). Apesar de ser útil para leitura humana, ele ocupa mais espaço e é irrelevante para o programa.
 - `ensure_ascii=False`: **muito importante** para nós! Sem esse parâmetro, o Python troca todo acento por um código estranho (tipo `é`) para "proteger" o arquivo. Com `ensure_ascii=False`, os acentos ficam normais.
 
 ### 📂 Carregando com `json.load()`
@@ -110,7 +137,7 @@ for heroi in guilda_carregada:
 
 ---
 ## ⛏️ 6. JSON de Verdade: o Caso do Minecraft
-Isso não é só teoria: o Minecraft usa JSON de verdade para guardar receitas de crafting, traduções de itens e até as "loot tables" (o que cada monstro pode largar ao morrer). Olha só como é parecido com um dicionário de tradução, igual fizemos na Aula 7:
+Isso não é só teoria: o Minecraft usa JSON de verdade para guardar receitas de crafting, [traduções](https://github.com/toxicity188/all-minecraft-language/tree/main) e até as "loot tables" (o que cada monstro pode largar ao morrer). Olha só como é parecido com um dicionário de tradução, igual fizemos na Aula 7:
 
 ```python
 # Isso é basicamente como o arquivo pt_br.json real do Minecraft funciona
@@ -119,6 +146,9 @@ traducoes: dict[str, str] = {
     "gold_ingot": "Lingote de Ouro",
     "stone": "Pedra"
 }
+
+with open("traducoes.json", "w", encoding="utf-8") as arquivo:
+    json.dump(traducoes, arquivo, indent=4, ensure_ascii=False)
 ```
 
 E uma loot table (o que um Zumbi pode largar) é só uma lista de dicionários dentro de um JSON:
@@ -128,6 +158,9 @@ loot_table_zumbi: list[dict] = [
     {"item": "Carne Podre", "chance": 100},
     {"item": "Lingote de Ferro", "chance": 5}
 ]
+
+with open("loot_table_zumbi.json", "w", encoding="utf-8") as arquivo:
+    json.dump(loot_table_zumbi, arquivo, indent=4, ensure_ascii=False)
 ```
 
 Combinando isso com o módulo `random` que já conhecemos (Aula 8), dá pra simular um drop de verdade a partir de um arquivo JSON — é exatamente isso que faremos nos desafios de hoje!
@@ -141,6 +174,8 @@ Crie um programa que pergunte a colheita do dia (nome do item e quantidade) e **
 | Entrada (1ª execução) | Saída |
 | :--- | :--- |
 | Morango<br>12 | (arquivo ainda não existe, sem histórico)<br>Dia 1: colhidos 12 de Morango |
+| Milho<br>10 | Dia 1: colhidos 12 de Morango<br>Dia 2: colhidos 10 de Milho |
+| Trigo<br>20 | Dia 1: colhidos 12 de Morango<br>Dia 2: colhidos 10 de Milho<br>Dia 3: colhidos 20 de Trigo |
 
 ```python
 # Solução:
@@ -212,14 +247,51 @@ Crie um programa que guarda a maior pontuação já alcançada em um arquivo `re
 | Entrada (arquivo com recorde 500) | Saída |
 | :--- | :--- |
 | 800 | NOVO RECORDE! Sua pontuação: 800 |
-| 300 | Você não bateu o recorde. Recorde atual: 500 |
+| 300 | Você não bateu o recorde. Recorde atual: 800 |
+
+```python
+# Solução:
+def atualizar_highscore(nome_arquivo: str, pontuacao_atual: int) -> str:
+    pass
+
+for pontuacao in [800, 300]:
+    print(atualizar_highscore("recorde.txt", pontuacao))
+
+#print(atualizar_highscore("recorde.txt", int(input())))
+```
 
 ## 4. Simulador de Loot Table
 Usando a `loot_table_zumbi` da seção 6 (salve ela em um arquivo `loot.json` primeiro), carregue o arquivo e sorteie um item respeitando a chance de cada um, usando `random.choices()` com o parâmetro `weights`.
 - **Dica:** pesquise como o parâmetro `weights` do `random.choices()` funciona.
 
+```python
+# Solução:
+def sortear_loot(nome_arquivo: str) -> str:
+    pass
+
+for _ in range(3):
+    print(sortear_loot("loot.json"))
+
+#print(sortear_loot("loot.json"))
+```
+
 ## 5. Backup de Inventário
-Crie uma lista de itens do inventário do jogador (pelo menos 5 itens). Salve essa lista em um arquivo `backup_inventario.json`. Depois, simule "perder" a lista original (apague a variável ou reinicie o notebook) e recupere o inventário completo carregando o arquivo de backup.
+Crie uma lista de itens do inventário do jogador (pelo menos 5 itens). Salve essa lista em um arquivo `backup_inventario.json`. Depois, simule "perder" a lista original (apague a variável usando `del`) e recupere o inventário completo carregando o arquivo de backup.
+
+```python
+# Solução:
+def salvar_inventario(nome_arquivo: str, inventario: list[str]) -> None:
+    pass
+
+def carregar_inventario(nome_arquivo: str) -> list[str]:
+    pass
+
+inventario_original: list[str] = ["Espada de Madeira", "Picareta de Pedra", "Maçã", "Tocha", "Escudo"]
+salvar_inventario("backup_inventario.json", inventario_original)
+
+inventario_recuperado: list[str] = carregar_inventario("backup_inventario.json")
+print("Inventário recuperado:", inventario_recuperado)
+```
 
 ## 6. Exportando Estatísticas do Clã
 Reaproveite o dicionário `cla` da Aula 7 (Dicionários de Listas):
@@ -230,4 +302,22 @@ cla: dict[str, list] = {
     "blocos_quebrados": [1500, 12000, 850]
 }
 ```
-Salve esse dicionário inteiro em um arquivo `cla.json` formatado (`indent=4`). Depois, escreva um segundo trecho de código que carrega esse arquivo e exibe as estatísticas de cada jogador, um por linha.
+Salve esse dicionário inteiro em um arquivo `cla.json` formatado. Depois, escreva um segundo trecho de código que carrega esse arquivo e exibe as estatísticas de cada jogador, um por linha.
+
+```python
+# Solução:
+def salvar_estatisticas_cla(nome_arquivo: str, dados_cla: dict[str, list]) -> None:
+    pass
+
+def exibir_estatisticas_cla(nome_arquivo: str) -> None:
+    pass
+
+dados_cla: dict[str, list] = {
+    "nomes": ["GamerPro", "MineCrafter", "RedstoneGuy"],
+    "dias_jogados": [12, 45, 8],
+    "blocos_quebrados": [1500, 12000, 850]
+}
+
+salvar_estatisticas_cla("cla.json", dados_cla)
+exibir_estatisticas_cla("cla.json")
+```
